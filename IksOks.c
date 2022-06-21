@@ -11,12 +11,6 @@ void display(char space1, char space2, char space3, char space4, char space5, ch
 
 }
 
-void checkWin(char space1, char space2, char space3, char space4, char space5, char space6, char space7, char space8, char space9, int turnNumbers) {
-
-
-
-}
-
 int main () {
     char filler;
     bool won = false;
@@ -62,9 +56,7 @@ int main () {
     for (i = 0; i <= 1; i++) {
     system("cls");
     display(space1, space2, space3, space4, space5, space6, space7, space8, space9, turnNumbers, i, won);
-    if (won = false) {
     if (turnNumbers %2 != 0) {
-
         printf("X's turn! \n");
         printf("Say the space number of your field: ");
         scanf("%d", &currentField);
@@ -211,4 +203,3 @@ int main () {
     i = i - 1;
     }
     }
-}
