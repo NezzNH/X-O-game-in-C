@@ -2,14 +2,71 @@
 #include <conio.h>
 #include <stdbool.h>
 
-
-void display(char space1, char space2, char space3, char space4, char space5, char space6, char space7, char space8, char space9, int turnNumbers, int i, bool won) {
-    
+void display(char space1, char space2, char space3, char space4, char space5, char space6, char space7, char space8, char space9, int turnNumbers, bool won) {
     printf("       |        |\n   %c   |   %c    |   %c    \n_______|________|________\n", space1, space2, space3); // Renderer for the board
     printf("       |        |\n   %c   |   %c    |   %c    \n_______|________|________\n", space4, space5, space6);         
     printf("       |        |\n   %c   |   %c    |   %c    \n       |        |        \n", space7, space8, space9); 
-
 }
+
+bool checkWin(char space1, char space2, char space3, char space4, char space5, char space6, char space7, char space8, char space9, bool won, int turnNumbers) {
+    
+    if (space1 != -78) {
+        if (space1 == space4 && space4 == space7) {
+            won = true;
+        }
+    }
+
+    if (space2 != -78) {
+        if (space2 == space5 && space5 == space8) {
+            won = true;
+        }
+    }
+
+    if (space3 != -78) {
+        if (space3 == space6 && space6 == space9) {
+            won = true;
+        }
+    }
+
+    if (space1 != -78) {
+        if (space1 == space2 && space2 == space3) {
+            won = true;
+        }
+    }
+
+    if (space4 != -78) {
+        if (space4 == space5 && space5 == space6) {
+            won = true;
+        }
+    }
+
+    if (space7 != -78) {
+        if (space7 == space8 && space8 == space9) {
+            won = true;
+        }
+    }
+
+    if (space1 != -78) {
+        if (space1 == space5 && space5 == space9) {
+            won = true;
+        }
+    }
+
+    if (space3 != -78) {
+        if (space3 == space5 && space5 == space7) {
+            won = true;
+        }
+    }
+
+    if (won == true) {
+        if (turnNumbers %2 == 0) {
+            printf("O won! \n");
+        }
+        else printf("X won! \n");
+    }
+    return won;
+}
+
 
 int main () {
     char filler;
@@ -18,45 +75,53 @@ int main () {
     char space2 = 178;
     char space3 = 178;
     char space4 = 178;
-    char space5 = 178;                  //sets the default shaded empty region
+    char space5 = 178;//sets the default shaded empty region
     char space6 = 178;
     char space7 = 178;
     char space8 = 178;
-    char space9 = 178;
+    char space9 = 178; //among us among us among us
     int turnNumbers = 1; //the current turn number
     int sign; // first sign to play x or o
     int currentField; //current field to be used
-    int i; //iterator
     char defaultValue = 178; //default value for comparing and finding an empty field
 
+    
+    
+    bool correct = false;
+    while(!correct){
     printf("Would you like to be: \n");
     printf("1. X \n");
     printf("2. O \n");
     printf("Write the number of the answer in: ");
     scanf("%d", &sign);
-
     switch (sign) {
 
         case 1:
-        printf("\nYou chose X!");
+        printf("You chose X!");
         turnNumbers = 1;
+        correct = true;
         break;
 
         case 2:
-        printf("\nYou chose O!");
+        printf("You chose O!");
         turnNumbers = 2;
+        correct = true;
         break;
 
         default: 
-        printf("\n You retarded as fuck");
+        printf("You retarded as fuck");
+        break;
 
 
     }
-
-    for (i = 0; i <= 1; i++) {
+    if(correct)
+    break;
+    }
+    while (won == false) {
     system("cls");
-    display(space1, space2, space3, space4, space5, space6, space7, space8, space9, turnNumbers, i, won);
-    if (turnNumbers %2 != 0) {
+    display(space1, space2, space3, space4, space5, space6, space7, space8, space9, turnNumbers, won);
+    won = checkWin(space1, space2, space3, space4, space5, space6, space7, space8, space9, won, turnNumbers);
+    if (turnNumbers %2 != 0 && won == false) {
         printf("X's turn! \n");
         printf("Say the space number of your field: ");
         scanf("%d", &currentField);
@@ -129,7 +194,7 @@ int main () {
 
     }
 
-    else {
+    else if (turnNumbers % 2 == 0 && won == false){
     printf("O's turn!");
     printf("\nSay the space number of your field: ");
     scanf("%d", &currentField);
@@ -199,7 +264,6 @@ int main () {
             }
             break;
         }      
-    } 
-    i = i - 1;
     }
     }
+}
